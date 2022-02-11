@@ -15,13 +15,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.8.2"
-  bloc:
-    dependency: transitive
-    description:
-      name: bloc
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "7.2.1"
   boolean_selector:
     dependency: transitive
     description:
@@ -585,11 +578,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "1.0.0-dev.2"
-      resolved-ref: "469eeaff022393ffb4abad744392b845cad6fd8e"
+      ref: "1.0.0-dev.3"
+      resolved-ref: f843c0af86e06e38f12b1fa36a60edce8bf3ae52
       url: "https://github.com/zemoga/z_dart.git"
     source: git
-    version: "1.0.0-dev.2"
+    version: "1.0.0-dev.3"
 sdks:
   dart: ">=2.14.4 <3.0.0"
   flutter: ">=2.5.0"

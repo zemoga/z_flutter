@@ -7,7 +7,7 @@ packages:
       name: archive
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "3.2.1"
+    version: "3.2.2"
   async:
     dependency: transitive
     description:
@@ -585,11 +585,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "1.0.0-dev.4"
-      resolved-ref: "6bee5c4fc66cdeae951dfa197c5d10b52007eff6"
+      ref: "1.0.0-dev.5"
+      resolved-ref: fe0be10efbb191fa7311a19e453525e770db2380
       url: "https://github.com/zemoga/z_dart.git"
     source: git
-    version: "1.0.0-dev.4"
+    version: "1.0.0-dev.5"
 sdks:
   dart: ">=2.15.0 <3.0.0"
   flutter: ">=2.10.0"

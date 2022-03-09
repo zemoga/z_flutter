@@ -2,7 +2,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:z_dart/convert.dart';
 import 'package:z_dart/io.dart';
 
-class SharedPreferencesCache<K, V> extends Cache<K, V> {
+class SharedPreferencesCache<K, V> extends LegacyCache<K, V> {
   final String name;
   final JsonMapper<V> _jsonMapper;
   final _prefsData = <String, V>{};

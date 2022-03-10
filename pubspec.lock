@@ -585,8 +585,8 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "1.0.0-dev.5"
-      resolved-ref: fe0be10efbb191fa7311a19e453525e770db2380
+      ref: "1.0.0-dev.6"
+      resolved-ref: a0923155c11bd07e468f72297e584341c52efdbe
       url: "https://github.com/zemoga/z_dart.git"
     source: git
     version: "1.0.0-dev.5"

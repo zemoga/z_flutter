@@ -1,6 +1,6 @@
 name: z_flutter
 description: A new Flutter package project.
-version: 1.0.0-dev.5
+version: 1.0.0-dev.6
 homepage:
 
 publish_to: 'none'
@@ -16,7 +16,7 @@ dependencies:
   z_dart:
     git:
       url: https://github.com/zemoga/z_dart.git
-      ref: 1.0.0-dev.5
+      ref: 1.0.0-dev.6
 
   path_provider: ^2.0.8
   shared_preferences: ^2.0.11

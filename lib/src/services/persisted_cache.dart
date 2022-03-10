@@ -113,6 +113,7 @@ class PersistedIdentifiableCollectionCache<T extends Identifiable>
 }
 
 ///
+@Deprecated('Use PersistedIdentifiableCollectionCache instead.')
 class PersistedEntityCollectionCache<T extends Entity>
     extends PersistedCollectionCache<T> with EntityCollectionCacheMixin<T> {
   PersistedEntityCollectionCache(

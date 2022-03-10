@@ -97,6 +97,22 @@ class PersistedCollectionCache<T> extends BasePersistedCache<Map<String, T>>
 }
 
 ///
+class PersistedIdentifiableCollectionCache<T extends Identifiable>
+    extends PersistedCollectionCache<T>
+    with IdentifiableCollectionCacheMixin<T> {
+  PersistedIdentifiableCollectionCache(
+    String name,
+    JsonMapper<T> jsonMapper,
+  ) : super(name, jsonMapper);
+
+  PersistedIdentifiableCollectionCache.from(
+    String name,
+    JsonMapper<T> jsonMapper,
+    Iterable<T> data,
+  ) : super.from(name, jsonMapper, data.toMap());
+}
+
+///
 class PersistedEntityCollectionCache<T extends Entity>
     extends PersistedCollectionCache<T> with EntityCollectionCacheMixin<T> {
   PersistedEntityCollectionCache(

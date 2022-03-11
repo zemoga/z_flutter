@@ -1,6 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:z_dart/convert.dart';
-import 'package:z_dart/io.dart';
+part of z.flutter.services;
 
 @Deprecated(
   'Use PersistedCache, PersistedCollectionCache '

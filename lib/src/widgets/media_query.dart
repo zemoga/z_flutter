@@ -1,4 +1,4 @@
-import 'package:flutter/widgets.dart';
+part of z.flutter.widgets;
 
 const int kTabletSizeWidthThreshold = 600;
 

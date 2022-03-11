@@ -1,6 +1,6 @@
-library rendering;
+library z.flutter.rendering;
 
 export 'package:flutter/rendering.dart';
 
-export 'src/rendering/dimens.dart';
-export 'src/rendering/tree.dart';
+part 'src/rendering/dimens.dart';
+part 'src/rendering/tree.dart';

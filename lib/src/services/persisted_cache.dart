@@ -1,9 +1,4 @@
-import 'package:meta/meta.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:z_dart/convert.dart';
-import 'package:z_dart/core.dart';
-import 'package:z_dart/ddd.dart';
-import 'package:z_dart/io.dart';
+part of z.flutter.services;
 
 ///
 abstract class BasePersistedCache<T> extends Cache<T> {

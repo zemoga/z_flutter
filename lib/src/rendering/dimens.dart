@@ -1,3 +1,5 @@
+part of z.flutter.rendering;
+
 class Dimens {
   Dimens._();
 

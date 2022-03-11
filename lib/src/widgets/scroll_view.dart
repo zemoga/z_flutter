@@ -1,5 +1,4 @@
-import 'package:flutter/widgets.dart';
-import 'package:sliver_tools/sliver_tools.dart';
+part of z.flutter.widgets;
 
 class SliverSection extends StatelessWidget {
   const SliverSection({

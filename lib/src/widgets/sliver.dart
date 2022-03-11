@@ -1,4 +1,4 @@
-import 'package:flutter/material.dart';
+part of z.flutter.widgets;
 
 /// A sliver that contains a circular progress indicator centered within
 /// the constrained area created from [width] and [height].

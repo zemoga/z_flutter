@@ -1,7 +1,4 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
-import '../../rendering.dart';
+part of z.flutter.widgets;
 
 /// A box that contains an image and a text message. The [dense]
 /// attribute is used to generate a more condensed layout variant

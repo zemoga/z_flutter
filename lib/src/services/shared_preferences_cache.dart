@@ -2,7 +2,10 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:z_dart/convert.dart';
 import 'package:z_dart/io.dart';
 
-@Deprecated('Use PersistedCache or PersistedCollectionCache instead')
+@Deprecated(
+  'Use PersistedCache, PersistedCollectionCache '
+  'or PersistedIdentifiableCollectionCache instead',
+)
 class SharedPreferencesCache<K, V> extends LegacyCache<K, V> {
   final String name;
   final JsonMapper<V> _jsonMapper;

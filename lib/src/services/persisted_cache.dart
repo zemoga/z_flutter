@@ -106,19 +106,3 @@ class PersistedIdentifiableCollectionCache<T extends Identifiable>
     Iterable<T> data,
   ) : super.from(name, jsonMapper, data.toMap());
 }
-
-///
-@Deprecated('Use PersistedIdentifiableCollectionCache instead.')
-class PersistedEntityCollectionCache<T extends Entity>
-    extends PersistedCollectionCache<T> with EntityCollectionCacheMixin<T> {
-  PersistedEntityCollectionCache(
-    String name,
-    JsonMapper<T> jsonMapper,
-  ) : super(name, jsonMapper);
-
-  PersistedEntityCollectionCache.from(
-    String name,
-    JsonMapper<T> jsonMapper,
-    Iterable<T> data,
-  ) : super.from(name, jsonMapper, data.toMap());
-}

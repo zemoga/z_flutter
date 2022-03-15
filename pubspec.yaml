@@ -21,7 +21,7 @@ dependencies:
   path_provider: ^2.0.8
   shared_preferences: ^2.0.11
   url_launcher: ^6.0.17
-  share_plus: ^3.0.4
+  share_plus: ^4.0.1
   package_info_plus: ^1.0.6
   lottie: ^1.2.0
   flutter_svg: ^1.0.0

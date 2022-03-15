@@ -585,11 +585,11 @@ packages:
     dependency: "direct main"
     description:
       path: "."
-      ref: "1.0.0-dev.9"
-      resolved-ref: c8a989c93614879a412cd316fe3481ec6a8178f4
+      ref: "1.0.0-dev.10"
+      resolved-ref: b8d11a36262b4b3d82ffff904c07dd1f13148327
       url: "https://github.com/zemoga/z_dart.git"
     source: git
-    version: "1.0.0-dev.9"
+    version: "1.0.0-dev.10"
 sdks:
   dart: ">=2.15.0 <3.0.0"
   flutter: ">=2.10.0"

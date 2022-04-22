@@ -65,9 +65,11 @@ class PersistedCollectionCache<T> extends BasePersistedCache<Map<String, T>>
     with CollectionCacheMixin<T> {
   PersistedCollectionCache(
     String name,
-    this.jsonMapper,
-  ) : super(name, {});
+    this.jsonMapper, {
+    Map<String, T> initialData = const {},
+  }) : super(name, initialData);
 
+  @Deprecated("Use default constructor instead")
   PersistedCollectionCache.from(
     String name,
     this.jsonMapper,
@@ -97,12 +99,17 @@ class PersistedIdentifiableCollectionCache<T extends Identifiable>
     with IdentifiableCollectionCacheMixin<T> {
   PersistedIdentifiableCollectionCache(
     String name,
-    JsonMapper<T> jsonMapper,
-  ) : super(name, jsonMapper);
+    JsonMapper<T> jsonMapper, {
+    Map<String, T> initialData = const {},
+  }) : super(name, jsonMapper, initialData: initialData);
 
   PersistedIdentifiableCollectionCache.from(
     String name,
     JsonMapper<T> jsonMapper,
-    Iterable<T> data,
-  ) : super.from(name, jsonMapper, data.toMap());
+    Iterable<T> identifiableList,
+  ) : super(
+          name,
+          jsonMapper,
+          initialData: identifiableList.associateBy((e) => e.id.toString()),
+        );
 }

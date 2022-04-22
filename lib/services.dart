@@ -4,7 +4,7 @@ import 'package:meta/meta.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:z_dart/convert.dart';
 import 'package:z_dart/core.dart'
-    show ScopeFunctions, Identifiable, IdentifiableIterableExt;
+    show Identifiable, IterableExt, ScopeFunctions;
 import 'package:z_dart/io.dart'
     show
         Cache,

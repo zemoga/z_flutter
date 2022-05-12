@@ -67,7 +67,7 @@ class PersistedCollectionCache<T> extends BasePersistedCache<Map<String, T>>
     String name,
     this.jsonMapper, {
     Map<String, T> initialData = const {},
-  }) : super(name, initialData);
+  }) : super(name, Map.of(initialData));
 
   @Deprecated("Use default constructor instead")
   PersistedCollectionCache.from(

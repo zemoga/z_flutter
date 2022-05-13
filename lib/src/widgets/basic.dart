@@ -62,13 +62,13 @@ class InformationMessage extends StatelessWidget {
           ),
           if (buttonTitle.isNotEmpty)
             TextButton(
-              child: Text(buttonTitle),
               onPressed: onButtonPressed,
               style: TextButton.styleFrom(
                 textStyle: theme.textTheme.bodyText2?.copyWith(
                   decoration: TextDecoration.underline,
                 ),
               ),
+              child: Text(buttonTitle),
             ),
         ],
       ),

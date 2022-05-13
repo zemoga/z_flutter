@@ -61,8 +61,7 @@ class PersistedCache<T> extends BasePersistedCache<T> {
   }
 }
 
-class PersistedCollectionCache<T> extends BasePersistedCache<Map<String, T>>
-    with CollectionCacheMixin<T> {
+class PersistedCollectionCache<T> extends BasePersistedCache<Map<String, T>> {
   PersistedCollectionCache(
     String name,
     this.jsonMapper, {
@@ -95,8 +94,7 @@ class PersistedCollectionCache<T> extends BasePersistedCache<Map<String, T>>
 
 ///
 class PersistedIdentifiableCollectionCache<T extends Identifiable>
-    extends PersistedCollectionCache<T>
-    with IdentifiableCollectionCacheMixin<T> {
+    extends PersistedCollectionCache<T> {
   PersistedIdentifiableCollectionCache(
     String name,
     JsonMapper<T> jsonMapper, {

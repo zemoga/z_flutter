@@ -75,6 +75,18 @@ class PersistedCollectionCache<T> extends BasePersistedCache<Map<String, T>> {
     Map<String, T> data,
   ) : super(name, data);
 
+  static PersistedCollectionCache<T> identifiable<T extends Identifiable>(
+    String name,
+    JsonMapper<T> jsonMapper, {
+    Iterable<T> identifiableList = const [],
+  }) {
+    return PersistedCollectionCache(
+      name,
+      jsonMapper,
+      initialData: identifiableList.associateBy((e) => e.id.toString()),
+    );
+  }
+
   final JsonMapper<T> jsonMapper;
 
   @override
@@ -93,6 +105,7 @@ class PersistedCollectionCache<T> extends BasePersistedCache<Map<String, T>> {
 }
 
 ///
+@Deprecated("Use 'PersistedCollectionCache.identifiable' instead")
 class PersistedIdentifiableCollectionCache<T extends Identifiable>
     extends PersistedCollectionCache<T> {
   PersistedIdentifiableCollectionCache(

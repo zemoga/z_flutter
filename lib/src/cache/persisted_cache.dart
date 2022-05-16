@@ -69,13 +69,6 @@ class PersistedCollectionCache<T> extends BasePersistedCache<Map<String, T>> {
     Map<String, T> initialData = const {},
   }) : super(name, Map.of(initialData));
 
-  @Deprecated("Use default constructor instead")
-  PersistedCollectionCache.from(
-    String name,
-    this.jsonMapper,
-    Map<String, T> data,
-  ) : super(name, data);
-
   static PersistedCollectionCache<T> identifiable<T extends Identifiable>(
     String name,
     JsonMapper<T> jsonMapper, {
@@ -103,25 +96,4 @@ class PersistedCollectionCache<T> extends BasePersistedCache<Map<String, T>> {
         prefsData.map((key, value) => MapEntry(key, jsonMapper.toJson(value)));
     return jsonEncode(jsonObj);
   }
-}
-
-///
-@Deprecated("Use 'PersistedCollectionCache.identifiable' instead")
-class PersistedIdentifiableCollectionCache<T extends Identifiable>
-    extends PersistedCollectionCache<T> {
-  PersistedIdentifiableCollectionCache(
-    String name,
-    JsonMapper<T> jsonMapper, {
-    Map<String, T> initialData = const {},
-  }) : super(name, jsonMapper, initialData: initialData);
-
-  PersistedIdentifiableCollectionCache.from(
-    String name,
-    JsonMapper<T> jsonMapper,
-    Iterable<T> identifiableList,
-  ) : super(
-          name,
-          jsonMapper,
-          initialData: identifiableList.associateBy((e) => e.id.toString()),
-        );
 }

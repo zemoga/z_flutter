@@ -1,4 +1,4 @@
-part of z.flutter.services;
+part of z.flutter.cache;
 
 ///
 abstract class BasePersistedCache<T> extends Cache<T> {

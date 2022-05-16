@@ -2,6 +2,7 @@ part of z.flutter.cache;
 
 ///
 abstract class BasePersistedCache<T> extends Cache<T> {
+  // TODO: Review a "Persistence Strategy" to use as constructor parameter.
   BasePersistedCache(
     this.name,
     T dfltData,

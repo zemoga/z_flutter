@@ -28,13 +28,13 @@ abstract class BasePersistedCache<T> extends Cache<T> {
   }
 
   @override
-  void emit(T data) {
+  set data(T data) {
     if (!_prefsDataLoaded) {
       _loadPrefsData(data)
-          .then((data) => super.emit(data))
+          .then((data) => super.data = data)
           .then((_) => _prefsDataLoaded = true);
     } else {
-      _savePrefsData(data).then((_) => super.emit(data));
+      _savePrefsData(data).then((_) => super.data = data);
     }
   }
 }

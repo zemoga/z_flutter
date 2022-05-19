@@ -2,101 +2,185 @@ part of z.flutter.cache;
 
 ///
 @Deprecated('This will be removed in a future version')
-abstract class BasePersistedCache<T> extends Cache<T> {
-  // TODO: Review a "Persistence Strategy" to use as constructor parameter.
-  BasePersistedCache(
-    this.name,
-    T dfltData,
-  ) : super(dfltData);
+abstract class BasePersistedCache<T> {
+  BasePersistedCache() {
+    load();
+  }
 
-  final String name;
-  bool _prefsDataLoaded = false;
+  final _subject = BehaviorSubject<T>();
+
+  /// The current stream of [data] elements.
+  Stream<T> get stream => _subject.stream;
+
+  /// The current [data].
+  T get data => _subject.value;
 
   @protected
-  T fromRawJson(String rawJson);
+  Future<T> onLoad();
 
   @protected
-  String toRawJson(T prefsData);
+  Future<void> onSave(T data);
 
-  Future<T> _loadPrefsData(T dflt) async {
-    final prefs = await SharedPreferences.getInstance();
-    return prefs.getString(name)?.let(fromRawJson) ?? dflt;
+  ///
+  Future<void> load() {
+    return onLoad().then((value) => _subject.add(value));
   }
 
-  Future<void> _savePrefsData(T prefsData) async {
-    final prefs = await SharedPreferences.getInstance();
-    return toRawJson(prefsData).let((it) => prefs.setString(name, it));
+  ///
+  Future<void> save(T data) {
+    return onSave(data).then((_) => _subject.add(data));
   }
 
-  @override
-  set data(T data) {
-    if (!_prefsDataLoaded) {
-      _loadPrefsData(data)
-          .then((data) => super.data = data)
-          .then((_) => _prefsDataLoaded = true);
-    } else {
-      _savePrefsData(data).then((_) => super.data = data);
-    }
-  }
+  /// Closes the instance.
+  /// This method should be called when the instance is no longer needed.
+  /// Once [close] is called, the instance can no longer be used.
+  void close() => _subject.close();
 }
 
 ///
 @Deprecated('This will be removed in a future version')
 class PersistedCache<T> extends BasePersistedCache<T> {
   PersistedCache(
-    String name,
+    this.name,
     this.jsonMapper,
-    T dfltData,
-  ) : super(name, dfltData);
+    this.dfltData,
+  ) : super();
 
+  final String name;
   final JsonMapper<T> jsonMapper;
+  final T dfltData;
 
   @override
-  T fromRawJson(String rawJson) {
-    final jsonObj = jsonDecode(rawJson);
-    return jsonMapper.fromJson(jsonObj);
+  Future<T> onLoad() {
+    return SharedPreferences.getInstance().then((prefs) {
+      final jsonRaw = prefs.getString(name);
+      final jsonObj = jsonRaw?.let((it) => jsonDecode(it));
+      return jsonObj?.let((it) => jsonMapper.fromJson(it)) ?? dfltData;
+    });
   }
 
   @override
-  String toRawJson(T prefsData) {
-    final jsonObj = jsonMapper.toJson(prefsData);
-    return jsonEncode(jsonObj);
+  Future<void> onSave(T data) async {
+    return SharedPreferences.getInstance().then((prefs) {
+      final jsonObj = jsonMapper.toJson(data);
+      final jsonRaw = jsonEncode(jsonObj);
+      prefs.setString(name, jsonRaw);
+    });
   }
 }
 
+///
 @Deprecated('This will be removed in a future version')
 class PersistedCollectionCache<T> extends BasePersistedCache<Map<String, T>> {
   PersistedCollectionCache(
-    String name,
-    this.jsonMapper, {
-    Map<String, T> initialData = const {},
-  }) : super(name, Map.of(initialData));
+    this.name,
+    this.jsonMapper,
+    this.dfltData,
+  ) : super();
 
-  static PersistedCollectionCache<T> identifiable<T extends Identifiable>(
-    String name,
-    JsonMapper<T> jsonMapper, {
-    Iterable<T> identifiableList = const [],
-  }) {
-    return PersistedCollectionCache(
-      name,
-      jsonMapper,
-      initialData: identifiableList.associateBy((e) => e.id.toString()),
-    );
-  }
-
+  final String name;
   final JsonMapper<T> jsonMapper;
+  final Map<String, T> dfltData;
 
   @override
-  Map<String, T> fromRawJson(String rawJson) {
-    final Map<String, dynamic> jsonObj = jsonDecode(rawJson);
-    return jsonObj
-        .map((key, value) => MapEntry(key, jsonMapper.fromJson(value)));
+  Future<Map<String, T>> onLoad() async {
+    return SharedPreferences.getInstance().then((prefs) {
+      final jsonRaw = prefs.getString(name);
+      final Map<String, dynamic>? jsonObj =
+          jsonRaw?.let((it) => jsonDecode(it));
+      return jsonObj?.map(
+            (key, value) => MapEntry(key, jsonMapper.fromJson(value)),
+          ) ??
+          dfltData;
+    });
   }
 
   @override
-  String toRawJson(Map<String, T> prefsData) {
-    final Map<String, dynamic> jsonObj =
-        prefsData.map((key, value) => MapEntry(key, jsonMapper.toJson(value)));
-    return jsonEncode(jsonObj);
+  Future<void> onSave(Map<String, T> data) {
+    return SharedPreferences.getInstance().then((prefs) {
+      final Map<String, dynamic> jsonObj = data.map(
+        (key, value) => MapEntry(key, jsonMapper.toJson(value)),
+      );
+      final jsonRaw = jsonEncode(jsonObj);
+      prefs.setString(name, jsonRaw);
+    });
+  }
+}
+
+///
+extension PersistedCollectionExt<T> on BasePersistedCache<Map<String, T>> {
+  Stream<List<T>> get values => stream.map((event) => event.values.toList());
+
+  Stream<List<T>> valuesWhere(bool Function(T value) test) {
+    return values.map((event) => event.where(test).toList());
+  }
+
+  Stream<T?> valueOrNull(String key) {
+    return stream.map((event) => event[key]);
+  }
+
+  Stream<T> valueOrElse(String key, {required T Function() orElse}) {
+    return valueOrNull(key).map((event) => event ?? orElse());
+  }
+
+  bool contains(String key) {
+    return data.containsKey(key);
+  }
+
+  Future<void> update(void Function(Map<String, T> data) block) {
+    return save(Map.of(data).also(block));
+  }
+
+  Future<void> put(String key, T value) {
+    return update((data) => data[key] = value);
+  }
+
+  @Deprecated('Use put instead. This will be removed in a future version')
+  Future<void> add(String key, T value) {
+    return put(key, value);
+  }
+
+  Future<void> addAll(Map<String, T> other) {
+    return update((data) => data.addAll(other));
+  }
+
+  Future<void> replaceAll(Map<String, T> other) {
+    return save(Map.of(other));
+  }
+
+  Future<void> remove(String key) {
+    return update((data) => data.remove(key));
+  }
+
+  Future<void> removeWhere(bool Function(String key, T value) test) {
+    return update((data) => data.removeWhere(test));
+  }
+
+  Future<void> clear() {
+    return save({});
+  }
+}
+
+///
+extension IdentifiableCollectionCacheExt<T extends Identifiable>
+    on BasePersistedCache<Map<String, T>> {
+  bool containsObject(T object) {
+    return contains(object.id.toString());
+  }
+
+  Future<void> addObject(T other) {
+    return put(other.id.toString(), other);
+  }
+
+  Future<void> addAllObjects(Iterable<T> others) {
+    return addAll(others.associateBy((e) => e.id.toString()));
+  }
+
+  Future<void> replaceAllObjects(Iterable<T> others) {
+    return replaceAll(others.associateBy((e) => e.id.toString()));
+  }
+
+  Future<void> removeObject(T other) {
+    return remove(other.id.toString());
   }
 }

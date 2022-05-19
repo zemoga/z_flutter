@@ -1,6 +1,7 @@
 part of z.flutter.cache;
 
 ///
+@Deprecated('This will be removed in a future version')
 abstract class BasePersistedCache<T> extends Cache<T> {
   // TODO: Review a "Persistence Strategy" to use as constructor parameter.
   BasePersistedCache(
@@ -40,6 +41,7 @@ abstract class BasePersistedCache<T> extends Cache<T> {
 }
 
 ///
+@Deprecated('This will be removed in a future version')
 class PersistedCache<T> extends BasePersistedCache<T> {
   PersistedCache(
     String name,
@@ -62,6 +64,7 @@ class PersistedCache<T> extends BasePersistedCache<T> {
   }
 }
 
+@Deprecated('This will be removed in a future version')
 class PersistedCollectionCache<T> extends BasePersistedCache<Map<String, T>> {
   PersistedCollectionCache(
     String name,

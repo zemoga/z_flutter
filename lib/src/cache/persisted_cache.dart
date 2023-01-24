@@ -54,7 +54,8 @@ class PersistedCache<T> extends BasePersistedCache<T> {
   Future<T> onLoad() {
     return SharedPreferences.getInstance().then((prefs) {
       final jsonRaw = prefs.getString(name);
-      final jsonObj = jsonRaw?.let((it) => jsonDecode(it));
+      final Map<String, dynamic>? jsonObj =
+          jsonRaw?.let((it) => jsonDecode(it));
       return jsonObj?.let((it) => jsonMapper.fromJson(it)) ?? dfltData;
     });
   }

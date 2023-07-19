@@ -52,7 +52,7 @@ class InformationMessage extends StatelessWidget {
           ),
           Text.rich(
             TextSpan(
-              style: theme.textTheme.bodyText2,
+              style: theme.textTheme.bodyMedium,
               text: messageText,
               children: messageTextSpan != null
                   ? <InlineSpan>[messageTextSpan!]
@@ -64,7 +64,7 @@ class InformationMessage extends StatelessWidget {
             TextButton(
               onPressed: onButtonPressed,
               style: TextButton.styleFrom(
-                textStyle: theme.textTheme.bodyText2?.copyWith(
+                textStyle: theme.textTheme.bodyMedium?.copyWith(
                   decoration: TextDecoration.underline,
                 ),
               ),

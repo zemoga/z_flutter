@@ -1,6 +1,6 @@
 part of z.flutter.rendering;
 
-class Dimens {
+final class Dimens {
   Dimens._();
 
   static const spacing100 = 4.0;

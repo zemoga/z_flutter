@@ -16,7 +16,7 @@ dependencies:
   z_dart:
     git:
       url: https://github.com/zemoga/z_dart.git
-      ref: 1.0.0-dev.24
+      ref: 1.0.0-dev.25
 
   path_provider: ^2.0.15
   shared_preferences: ^2.2.0

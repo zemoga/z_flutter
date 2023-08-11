@@ -18,11 +18,7 @@ dependencies:
       url: https://github.com/zemoga/z_dart.git
       ref: 1.0.0-dev.26
 
-  path_provider: ^2.0.15
   shared_preferences: ^2.2.0
-  url_launcher: ^6.1.12
-  share_plus: ^7.0.2
-  package_info_plus: ^4.0.2
   lottie: ^2.5.0
   flutter_svg: ^2.0.7
   sliver_tools: ^0.2.12

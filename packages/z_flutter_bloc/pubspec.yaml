@@ -1,0 +1,17 @@
+name: z_flutter_bloc
+description: Zemoga Flutter Bloc library.
+version: 1.0.0-dev.1
+
+environment:
+  sdk: ">=3.0.0 <4.0.0"
+  flutter: ">=3.10.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_bloc: ^7.3.3
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.2

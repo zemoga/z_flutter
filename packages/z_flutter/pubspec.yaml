@@ -1,6 +1,6 @@
 name: z_flutter
 description: Zemoga Flutter library.
-version: 1.0.0-dev.32
+version: 1.0.0-dev.33
 
 environment:
   sdk: ">=3.0.0 <4.0.0"

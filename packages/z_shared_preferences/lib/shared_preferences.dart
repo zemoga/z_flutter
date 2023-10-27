@@ -6,6 +6,23 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 export 'package:shared_preferences/shared_preferences.dart';
 
+extension ExtSharedPreferences on SharedPreferences {
+  T? getStructureData<T>(
+    String key,
+    T? Function(String? value) parser,
+  ) {
+    return parser(getString(key));
+  }
+
+  Future<bool> setStructuredData<T>(
+    String key,
+    T value,
+    String Function(T value) parser,
+  ) {
+    return setString(key, parser(value));
+  }
+}
+
 extension RxSharedPreferences on SharedPreferences {
   bool getAndEmitBool(
     StreamController<bool> controller,
@@ -43,6 +60,17 @@ extension RxSharedPreferences on SharedPreferences {
     required String dfltValue,
   }) {
     final value = getString(key) ?? dfltValue;
+    controller.add(value);
+    return value;
+  }
+
+  T getAndEmitStructuredData<T>(
+    StreamController<T> controller,
+    String key, {
+    required T dfltValue,
+    required T? Function(String? value) parser,
+  }) {
+    final value = getStructureData(key, parser) ?? dfltValue;
     controller.add(value);
     return value;
   }
@@ -89,6 +117,19 @@ extension RxSharedPreferences on SharedPreferences {
     String value,
   ) async {
     final success = await setString(key, value);
+    if (success) {
+      controller.add(value);
+    }
+    return success;
+  }
+
+  Future<bool> setAndEmitStructuredData<T>(
+    StreamController<T> controller,
+    String key,
+    T value,
+    String Function(T value) parser,
+  ) async {
+    final success = await setStructuredData(key, value, parser);
     if (success) {
       controller.add(value);
     }

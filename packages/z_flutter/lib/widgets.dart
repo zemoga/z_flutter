@@ -1,5 +1,7 @@
 library z.flutter.widgets;
 
+import 'dart:ui';
+
 import 'package:flutter/widgets.dart';
 import 'package:sliver_tools/sliver_tools.dart' show MultiSliver;
 
@@ -10,4 +12,5 @@ export 'package:sliver_tools/sliver_tools.dart';
 
 part 'src/widgets/footer_view.dart';
 part 'src/widgets/media_query.dart';
+part 'src/widgets/page_view_indicator.dart';
 part 'src/widgets/scroll_view.dart';

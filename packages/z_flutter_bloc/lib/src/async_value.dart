@@ -1,4 +1,4 @@
-part of z.flutter.bloc;
+part of '../flutter_bloc.dart';
 
 sealed class AsyncValue<T> {
   const AsyncValue();

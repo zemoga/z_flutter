@@ -1,12 +1,12 @@
-part of z.flutter.widgets;
+part of '../../widgets.dart';
 
 class SliverSection extends StatelessWidget {
   const SliverSection({
-    Key? key,
+    super.key,
     this.header,
     this.footer,
     required this.body,
-  }) : super(key: key);
+  });
 
   final Widget? header;
   final Widget? footer;

@@ -1,4 +1,4 @@
-part of z.flutter.widgets;
+part of '../../widgets.dart';
 
 ///
 abstract class IndicatorPainter extends CustomPainter {

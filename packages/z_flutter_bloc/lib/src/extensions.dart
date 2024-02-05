@@ -1,4 +1,4 @@
-part of z.flutter.bloc;
+part of '../flutter_bloc.dart';
 
 extension AsyncValueEmitter<State> on Emitter<State> {
   /// Subscribes to the provided [stream] and invokes the [onValue] callback

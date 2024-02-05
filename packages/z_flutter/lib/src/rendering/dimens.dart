@@ -1,4 +1,4 @@
-part of z.flutter.rendering;
+part of '../../rendering.dart';
 
 final class Dimens {
   Dimens._();

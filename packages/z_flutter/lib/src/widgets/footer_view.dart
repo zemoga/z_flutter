@@ -1,4 +1,4 @@
-part of z.flutter.widgets;
+part of '../../widgets.dart';
 
 class FooterView extends StatelessWidget {
   const FooterView({

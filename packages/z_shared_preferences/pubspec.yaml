@@ -1,6 +1,6 @@
 name: z_shared_preferences
 description: Zemoga Shared Preferences library.
-version: 1.0.0-dev.2
+version: 1.0.0-dev.3
 
 environment:
   sdk: ">=3.0.0 <4.0.0"
